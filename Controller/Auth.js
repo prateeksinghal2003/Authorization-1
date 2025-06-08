@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken")
 //to interact with db i imported model
 
 require("dotenv").config()
-
+//This line loads environment variables from a .env file into process.env 
 // Sign up route handler 
 
 exports.signup = async(req,res) =>
@@ -149,15 +149,18 @@ exports.login = async (req,res) => {
 // The if statement checks if the comparison result is true (passwords match) or false (passwords don't match). 
 // If the result is true, the user is authenticated.
 
-    const payload = {
+    
+
+        if(bcrypt.compare(password,user.password)){
+            // password match  --->then do login
+            //create a token ---read about it at last
+
+
+            const payload = {
                       email : user.email,
                       id : user._id,
                       role : user.role,
                     };
-
-        if(await bcrypt.compare(password,user.password)){
-            // password match  --->then do login
-            //create a token ---read about it at last
 
             let token = jwt.sign(payload,process.env.JWT_SECRET,{
                 expiresIn : "2h",

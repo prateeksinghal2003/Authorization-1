@@ -7,6 +7,8 @@ const User = require("../Models/User");
 //importing controller
 
 const {login,signup} = require("../Controller/Auth");
+//This line is using destructuring to import only specific named exports (login, signup) from the module.
+//should have same names
 
 //importing middleware
 const { auth, isAdmin, isStudent } = require("../middleware/auth")
